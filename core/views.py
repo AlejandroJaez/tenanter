@@ -1,5 +1,9 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
+
+from core.models import Product
 
 
 # Create your views here.
@@ -12,3 +16,14 @@ def test_view(request: HttpRequest) -> HttpResponse:
     """
     print("test view")
     return render(request, "core/index.html")
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ["name"]
+    success_url = reverse_lazy("create")
+
+
+class ProductListView(ListView):
+    model = Product
+    fields = ["name"]

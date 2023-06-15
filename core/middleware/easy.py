@@ -57,7 +57,7 @@ class TenantMiddleware(MiddlewareMixin):
         if tenant:
             # views works with tenant
             with tenant_context(tenant):
-                return self.get_response(request)
+                return
 
     def no_tenant_found(self, request, hostname):
         """ What should happen if no tenant is found.

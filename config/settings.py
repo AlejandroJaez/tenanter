@@ -112,3 +112,4 @@ TENANT_MODEL = "core.Customer"  # app.Model
 
 TENANT_DOMAIN_MODEL = "core.Domain"  # app.Model
 PUBLIC_SCHEMA_URLCONF = "config.urls"
+EASY_TENANTS_TENANT_FIELD = "tenant"
