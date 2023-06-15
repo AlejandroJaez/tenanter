@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tenanter"
+version = "0.1.0"
+description = ""
+authors = ["Alejandro Hernandez <alejandrojaez@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.2"
+django-easy-tenants = "^0.7.1"
+django-tenants = "^3.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
