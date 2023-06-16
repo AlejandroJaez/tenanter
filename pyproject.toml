@@ -10,6 +10,7 @@ python = "^3.11"
 django = "^4.2.2"
 django-easy-tenants = "^0.7.1"
 django-tenants = "^3.5.0"
+django-ninja = "^0.22.2"
 
 
 [build-system]

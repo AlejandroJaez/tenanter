@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .api import api_v1
 
 from core.views import test_view, ProductCreateView, ProductListView
 
@@ -23,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("create", ProductCreateView.as_view(), name="create"),
     path("list", ProductListView.as_view(), name="list"),
+    path("api/", api_v1.urls, name="api")
 ]

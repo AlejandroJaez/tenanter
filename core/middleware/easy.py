@@ -9,7 +9,7 @@ from django_tenants.utils import remove_www, get_tenant_domain_model, get_public
 from easy_tenants import tenant_context, tenant_context_disabled
 
 from config import settings
-from core.models import Customer
+from core.models import Tenant
 
 URLS = ["customer-list", "set-tenant"]
 
@@ -40,24 +40,24 @@ class TenantMiddleware(MiddlewareMixin):
         return domain.tenant
 
     def process_request(self, request):
-        tenant = self.get_tenant(request)
-        request.tenant = tenant
-        self.setup_url_routing(request)
-        # tenant filter is disabled in admin
         if request.path.startswith("/admin/"):
             with tenant_context_disabled():
                 return self.get_response(request)
+        tenant = self.get_tenant(request)
+        self.tenant = tenant
+        request.tenant = tenant
+        self.setup_url_routing(request)
+        # tenant filter is disabled in admin
 
-        ignored_path = any(
-            resolve(request.path).view_name == url for url in URLS
-        )
-        if not tenant and not ignored_path:
-            return redirect("customer-list")
+
+        # ignored_path = any(
+        #     resolve(request.path).view_name == url for url in URLS
+        # )
 
         if tenant:
             # views works with tenant
             with tenant_context(tenant):
-                return
+                return self.get_response(request)
 
     def no_tenant_found(self, request, hostname):
         """ What should happen if no tenant is found.
